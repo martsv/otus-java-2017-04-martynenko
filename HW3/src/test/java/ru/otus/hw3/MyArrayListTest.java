@@ -25,6 +25,13 @@ public class MyArrayListTest {
     }
 
     @Test
+    public void testSort2() {
+        List<Integer> list = new MyArrayList<>();
+        Collections.sort(list, Integer::compareTo);
+        assertArrayEquals(list.toArray(), new Integer[] {});
+    }
+
+    @Test
     public void testAddAll() {
         List<Integer> list = new MyArrayList<>();
         list.add(1);
@@ -76,6 +83,17 @@ public class MyArrayListTest {
         list.add(2);
         list.add(3);
         assertArrayEquals(list.toArray(), new Integer[] {1, 2, 3});
+    }
+
+    @Test
+    public void testCapacity2() {
+        List<Integer> list = new MyArrayList<>();
+        for (int i = 0; i < 100000; i++) {
+            list.add(i);
+        }
+        for (int i = 0; i < 100000; i++) {
+            assertEquals(list.get(i), Integer.valueOf(i));
+        }
     }
 
     @Test

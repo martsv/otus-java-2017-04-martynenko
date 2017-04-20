@@ -205,7 +205,9 @@ public class MyArrayList<T> implements List<T> {
             private int last = -1;
 
             {
-                checkBounds(index);
+                if (index < 0 || index > size()) {
+                    throw new IndexOutOfBoundsException();
+                }
             }
 
             @Override
@@ -285,10 +287,7 @@ public class MyArrayList<T> implements List<T> {
 
     private void checkLength(int count) {
         if (size() + count > capacity) {
-            while (size() + count > capacity) {
-                capacity *= 2;
-            }
-            Object[] newData = new Object[capacity];
+            Object[] newData = new Object[Math.max(capacity * 2, size() + count)];
             System.arraycopy(data, from, newData, 0, size());
             data = newData;
             to = size();
